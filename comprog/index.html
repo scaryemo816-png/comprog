@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEC Demand Factor Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav-bar">
+    <button class="btn btn-secondary" onclick="toggleMode()">🌓</button>
+    <div style="display: flex; gap: 8px;">
+        <button id="nav-return" class="btn btn-danger" style="display: none;" onclick="goHome()">↩ Back</button>
+        <button id="nav-admin" class="btn btn-secondary" onclick="showAdmin()">⚙ Admin</button>
+    </div>
+</div>
+
+<div class="container">
+    <div id="start-screen" class="card animate" style="text-align: center; padding: 60px 20px;">
+        <div style="font-size: 3rem; margin-bottom: 10px;">⚡</div>
+        <h1>PEC Load Estimator</h1>
+        <p style="opacity: 0.7; margin-bottom: 30px;">Professional Grade Electrical Demand Calculator</p>
+        <button class="btn btn-primary" onclick="startApp()">START CALCULATION</button>
+    </div>
+
+    <div id="admin-panel" class="card animate" style="display: none;">
+        <h3>⚙ Reference Tables</h3>
+        
+        <div class="input-group">
+            <span class="input-label">Select Table to View</span>
+            <select id="table-selector" onchange="switchTable()">
+                <option value="none">-- Choose Table --</option>
+                <option value="motor">Single-Phase AC Motors (t9 (1).jpg)</option>
+                <option value="lighting">Lighting Occupancy (t5 (2).jpg)</option>
+                <option value="dryer">Clothes Dryers (t6.jpg)</option>
+                <option value="cooking">Cooking Appliances (t8 (1).jpg)</option>
+            </select>
+        </div>
+
+        <div id="table-display" class="table-container" style="display: none;">
+            <table id="ref-table">
+                <thead id="ref-thead"></thead>
+                <tbody id="ref-tbody"></tbody>
+            </table>
+        </div>
+
+        <button class="btn btn-secondary" style="margin-top: 20px;" onclick="goHome()">Exit Admin</button>
+    </div>
+
+    <div id="calc-app" style="display: none;">
+        
+        <div class="card animate">
+            <h3>💡 1. General Lighting</h3>
+            <div class="input-group">
+                <span class="input-label">Total Connected VA</span>
+                <input type="number" id="in-lighting" placeholder="e.g. 5000" oninput="liveCalc()">
+            </div>
+            <div class="sub-result" id="res-lighting">Demand: 0 VA</div>
+        </div>
+
+        <div class="card animate">
+            <h3>🍳 2. Fixed Appliances</h3>
+            <div class="load-row">
+                <div class="input-group">
+                    <span class="input-label">Quantity</span>
+                    <input type="number" id="qty-fixed" value="0" oninput="liveCalc()">
+                </div>
+                <div class="input-group">
+                    <span class="input-label">VA per Unit</span>
+                    <input type="number" id="in-fixed" placeholder="0" oninput="liveCalc()">
+                </div>
+            </div>
+            <div class="sub-result" id="res-fixed">Demand: 0 VA</div>
+        </div>
+
+        <div class="card animate">
+            <h3>🧺 3. Clothes Dryers</h3>
+            <div class="load-row">
+                <div class="input-group">
+                    <span class="input-label">Qty</span>
+                    <input type="number" id="qty-dryer" value="0" oninput="liveCalc()">
+                </div>
+                <div class="input-group">
+                    <span class="input-label">VA per Unit</span>
+                    <input type="number" id="in-dryer" placeholder="5000" oninput="liveCalc()">
+                </div>
+            </div>
+            <div class="sub-result" id="res-dryer">Demand: 0 VA</div>
+        </div>
+
+        <div class="card animate">
+            <h3>🌀 4. Largest Motor Load</h3>
+            <div class="load-row">
+                <div class="input-group">
+                    <span class="input-label">Horsepower (HP)</span>
+                    <select id="motor-hp" onchange="liveCalc()">
+                        <option value="0">Select HP</option>
+                        <option value="0.166">1/6 HP</option>
+                        <option value="0.25">1/4 HP</option>
+                        <option value="0.33">1/3 HP</option>
+                        <option value="0.5">1/2 HP</option>
+                        <option value="0.75">3/4 HP</option>
+                        <option value="1">1 HP</option>
+                        <option value="1.5">1.5 HP</option>
+                        <option value="2">2 HP</option>
+                        <option value="3">3 HP</option>
+                        <option value="5">5 HP</option>
+                        <option value="7.5">7.5 HP</option>
+                        <option value="10">10 HP</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-label">Voltage (V)</span>
+                    <select id="motor-volts" onchange="liveCalc()">
+                        <option value="115">115 V</option>
+                        <option value="200">200 V</option>
+                        <option value="208">208 V</option>
+                        <option value="230">230 V</option>
+                    </select>
+                </div>
+            </div>
+            <div class="sub-result" id="res-motor">Demand: 0 VA</div>
+        </div>
+
+        <div class="total-sticky" id="sticky-total" style="display: none;">
+            <span>TOTAL VA</span>
+            <span id="grand-total">0.00</span>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
