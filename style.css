@@ -1,0 +1,231 @@
+/* style.css */
+
+:root {
+    --bg: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text: #1e293b;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --accent: #059669;
+    --border: #e2e8f0;
+    --danger: #ef4444;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.9);
+    --text: #f1f5f9;
+    --primary: #3b82f6;
+    --primary-hover: #60a5fa;
+    --accent: #10b981;
+    --border: #334155;
+    --danger: #f87171;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.5;
+    transition: background 0.3s ease;
+    padding-bottom: 100px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-radius: 0 0 12px 12px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary { 
+    background: var(--primary); 
+    color: white; 
+    width: 100%; 
+    justify-content: center; 
+    padding: 14px; 
+}
+
+.btn-primary:hover { 
+    background: var(--primary-hover); 
+    transform: translateY(-1px); 
+}
+
+.btn-secondary { 
+    background: var(--border); 
+    color: var(--text); 
+}
+
+.btn-danger { 
+    background: var(--danger); 
+    color: white; 
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:focus-within {
+    border-color: var(--primary);
+    transform: scale(1.01);
+}
+
+h1, h3 { 
+    margin-top: 0; 
+    color: var(--text); 
+}
+
+h3 { 
+    font-size: 1.1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+}
+
+.input-group { 
+    margin-bottom: 15px; 
+}
+
+.input-label { 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    font-weight: 700; 
+    margin-bottom: 6px; 
+    color: var(--primary); 
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus { 
+    border-color: var(--primary); 
+}
+
+.load-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.sub-result {
+    margin-top: 15px;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.total-sticky {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: var(--primary);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 50px;
+    text-align: center;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#grand-total { 
+    font-size: 1.4rem; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate { 
+    animation: fadeIn 0.4s ease forwards; 
+}
+
+@media (max-width: 600px) {
+    .load-row { 
+        grid-template-columns: 1fr; 
+    }
+}
+/* TABLE STYLING */
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: var(--bg);
+    color: var(--primary);
+    font-weight: 700;
+}
